@@ -1,0 +1,79 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Chatbox</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB"
+    crossorigin="anonymous">
+</head>
+
+<body style="padding-top: 100px; padding-bottom: 100px">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-8">
+        <div class="card">
+          <div class="card-body">
+            <div id="join">
+                <div class="form-group">
+                  <div class='input-group'>
+                    <input type='text' name='message' class="form-control txt-mesg" placeholder="Type your message...">
+
+                    <div class='input-group-append'>
+                      <button class='btn btn-primary' onclick="SendSMS()">Send</button>
+                    </div>
+                  </div>
+                </div>
+            </div>
+
+            <div id="chatbox" style="display: none">
+              <div class="row">
+                <div class="col-md-8">
+                  <div class="card">
+                    <div class="card-header">Chatbox</div>
+                    <div class="card-body">
+                      <dl id="messageList"></dl>
+                      <hr>
+                        <div class='input-group'>
+                          <input type='text' name='message' class="form-control txt-mesg" placeholder="Type your message...">
+
+                          <div class='input-group-append'>
+                            <button class='btn btn-primary' >Send</button>
+                          </div>
+                        </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="card">
+                    <div class="card-header">Users Online</div>
+                    <div class="card-body p-0">
+                      <ul id="onlineUsers" class="list-group list-group-flush"></ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://unpkg.com/@pusher/chatkit-client"></script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script >
+    function SendSMS() {
+      var txtMesg = document.querySelector('.txt-mesg');
+      axios.post('http://localhost:8080/sendmessage',{message:txtMesg.value}).then(t => console.log(t))
+      .catch(e => console.log(e))
+    }
+  </script>
+</body>
+
+</html>
+
+

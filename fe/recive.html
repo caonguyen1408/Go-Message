@@ -38,6 +38,7 @@
   <script src="https://unpkg.com/@pusher/chatkit-client"></script>
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
   <script >
+    window.onload=GetSMS;
       function GetSMS() {
         var txtMesg = document.querySelector('.txt-mesg');
         axios.get('http://127.0.0.1:8080/getmessage').then(t => {

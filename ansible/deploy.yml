@@ -1,8 +1,6 @@
 ---
 - hosts: localhost
   tasks:
-    - name: Pull Code From Git
-      shell: git clone https://github.com/caonguyen1408/Go-Message 
     - name: Create Network For Project
       shell: docker network create --driver=bridge --subnet=192.168.2.0/24 --gateway=192.168.2.10 vlan
     - name: Deploy Web Server Container

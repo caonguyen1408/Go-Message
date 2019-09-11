@@ -1,6 +1,10 @@
 ---
 - hosts: localhost
   tasks:
+    - name: Copy Backend Code
+      copy:
+        src: ../be/main.go
+        dst: ./
     - name: Create Network For Project
       shell: docker network create --driver=bridge --subnet=192.168.2.0/24 --gateway=192.168.2.10 vlan
     - name: Deploy Web Server Container

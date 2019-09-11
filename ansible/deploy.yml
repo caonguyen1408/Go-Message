@@ -1,0 +1,17 @@
+---
+- hosts: localhost
+  tasks:
+    - name: Pull Code From Git
+      shell: git clone https://github.com/caonguyen1408/Go-Message 
+    - name: Create Network For Project
+      shell: docker network create --driver=bridge --subnet=192.168.2.0/24 --gateway=192.168.2.10 vlan
+    - name: Deploy Web Server Container
+      shell: docker run -d --name web-server -p 80:80 --network=vlan --ip 192.168.2.4 -v ~/Go-Message/fe/:/usr/share/nginx/html nginx
+    - name: Deploy RabbitMQ Server Container
+      shell: docker run -d  --name rabbit-server --network=vlan --ip 192.168.2.3 -e RABBITMQ_DEFAULT_USER=user -e RABBITMQ_DEFAULT_PASS=password rabbitmq:3-management
+    - name: Deploy Redis Server Container
+      shell: docker run -d -p 6379:6379 --name redis-server --network=vlan --ip 192.168.2.5 redis
+    - name: Create Docker Image Golang Server (Take Long Time ^^)
+      shell: docker build -f Dockerfile . -t gorestapi:latest
+    - name: Deloy Golang Server Container
+      shell: docker run -d -p 8080:8080 --network=vlan --ip 192.168.2.6 --name golang-server gorestapi:latest

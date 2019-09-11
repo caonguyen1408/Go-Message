@@ -19,43 +19,13 @@
           <div class="card-body">
             <div id="join">
                 <div class="form-group">
-                  <div class='input-group'>
                     <input type='text' name='message' class="form-control txt-mesg" placeholder="Type your message...">
-
-                    <div class='input-group-append'>
                       <button class='btn btn-primary' onclick="SendSMS()">Send</button>
+                      <input type='text' name='message' class="form-control txt-getmesg">
+                      <button class='btn btn-danger' onclick="GetSMS()">Receive</button>
                     </div>
                   </div>
                 </div>
-            </div>
-
-            <div id="chatbox" style="display: none">
-              <div class="row">
-                <div class="col-md-8">
-                  <div class="card">
-                    <div class="card-header">Chatbox</div>
-                    <div class="card-body">
-                      <dl id="messageList"></dl>
-                      <hr>
-                        <div class='input-group'>
-                          <input type='text' name='message' class="form-control txt-mesg" placeholder="Type your message...">
-
-                          <div class='input-group-append'>
-                            <button class='btn btn-primary' >Send</button>
-                          </div>
-                        </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-md-4">
-                  <div class="card">
-                    <div class="card-header">Users Online</div>
-                    <div class="card-body p-0">
-                      <ul id="onlineUsers" class="list-group list-group-flush"></ul>
-                    </div>
-                  </div>
-                </div>
-              </div>
             </div>
           </div>
         </div>
@@ -71,6 +41,13 @@
       axios.post('http://localhost:8080/sendmessage',{message:txtMesg.value}).then(t => console.log(t))
       .catch(e => console.log(e))
     }
+    function GetSMS() {
+        var txtMesg = document.querySelector('.txt-getmesg');
+        axios.get('http://127.0.0.1:8080/getmessage').then(t => {
+          txtMesg.value=t.data.message
+        })
+        .catch(e => console.log(e))
+      }
   </script>
 </body>
 

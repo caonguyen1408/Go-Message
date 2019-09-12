@@ -22,5 +22,11 @@ Usage
 
 
 #### Test
+
+Localhost Test
+------
 `http://127.0.0.1/send.html`
 
+VPS Test
+-------
+`http://vps_ip/send.html`

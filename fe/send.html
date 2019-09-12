@@ -38,12 +38,12 @@
   <script >
     function SendSMS() {
       var txtMesg = document.querySelector('.txt-mesg');
-      axios.post('http://localhost:8080/sendmessage',{message:txtMesg.value}).then(t => console.log(t))
+      axios.post('http://{{ ansible_ip }}:8080/sendmessage',{message:txtMesg.value}).then(t => console.log(t))
       .catch(e => console.log(e))
     }
     function GetSMS() {
         var txtMesg = document.querySelector('.txt-getmesg');
-        axios.get('http://127.0.0.1:8080/getmessage').then(t => {
+        axios.get('http://{{ ansible_ip }}:8080/getmessage').then(t => {
           txtMesg.value=t.data.message
         })
         .catch(e => console.log(e))
